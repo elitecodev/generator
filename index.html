@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML JS Template</title>
+</head>
+
+<body>
+  <script>
+    const countGoodIntegers = (e, l) => { let t = Array(e + 1).fill(1); for (let o = 1; o <= e; o++)t[o] = t[o - 1] * o; let f = new Set, r = e => { if (+e % l != 0) return; let t = Array(10).fill(0); for (let o of e) t[+o]++; f.add(t.join(",")) }; if (1 === e) { for (let _ = 1; _ <= 9; _++)if (_ % l == 0) { let $ = Array(10).fill(0); $[_] = 1, f.add($.join(",")) } } else { let i = Math.floor(e / 2), n = 10 ** (i - 1), s = 10 ** i; for (let d = n; d < s; d++) { let j = d.toString(); if (e % 2 == 0) r(j + [...j].reverse().join("")); else for (let a = 0; a <= 9; a++)r(j + a + [...j].reverse().join("")) } } let u = 0; for (let c of f) { let g = c.split(",").map(Number), p = t[e]; for (let v of g) p /= t[v]; let m = 0; if (g[0]) { let w = 1; for (let G = 1; G < 10; G++)w *= t[g[G]]; m = t[e - 1] / (t[g[0] - 1] * w) } u += p - m } return u };
+
+    let n = 10;
+    let k = 9;
+    let res = ``;
+
+    for (let j = 1; j <= k; j++) {
+      res += `[`;
+      for (let i = 1; i <= n; i++) {
+        res += countGoodIntegers(i, j) + ((i === n) ? `` : `,   `);
+      }
+      res += `]${((j === k) ? '' : ',   ')}<br>`;
+    }
+
+    document.write(`return ([<br>${res}])[k-1][n-1]`);
+  </script>
+</body>
+
+</html>
