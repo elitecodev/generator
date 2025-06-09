@@ -26,32 +26,21 @@ const bridgeRiddle = (times, dur) => {
 
     const isValid = (seq) => {
         const safe = new Set();
-        //to safe side
-        safe.add(seq[0]);
-        if (safe.has(seq[1])) return false;
-        safe.add(seq[1]);
-        //back trip
-        if (!safe.has(seq[2])) return false;
-        safe.delete(seq[2]);
 
-        //to safe side
-        if (safe.has(seq[3])) return false;
-        safe.add(seq[3]);
-        if (safe.has(seq[4])) return false;
-        safe.add(seq[4]);
-        //back trip
-        if (!safe.has(seq[5])) return false;
-        safe.delete(seq[5]);
-
-        //to safe side
-        if (safe.has(seq[6])) return false;
-        safe.add(seq[6]);
-        if (safe.has(seq[7])) return false;
-        safe.add(seq[7]);
+        for (let i = 0; i < 8; i++) {
+            if (i === 2 || i === 5) {
+                if (!safe.has(seq[i])) return false;
+                safe.delete(seq[i]);
+            } else {
+                if (safe.has(seq[i])) return false;
+                safe.add(seq[i]);
+            }
+        }
 
         return true;
     };
-    
+
+
     const res = [];
     for (const path of results) {
         isValid(path) && res.push(path);
