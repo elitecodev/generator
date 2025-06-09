@@ -27,7 +27,7 @@ const bridgeRiddle = (times, dur) => {
     const isValid = (seq) => {
         const safe = new Set();
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < seq.length; i++) {
             if (i === 2 || i === 5) {
                 if (!safe.has(seq[i])) return false;
                 safe.delete(seq[i]);
