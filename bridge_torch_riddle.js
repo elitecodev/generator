@@ -5,12 +5,12 @@ const bridgeRiddle = (times, limit, res = []) => {
         const safe = new Set();
 
         for (let i = 0; i < seq.length; i++) {
-            if (!((i + 1) % 3)) {
-                if (!safe.has(seq[i])) return false;
-                safe.delete(seq[i]);
-            } else {
+            if ((i + 1) % 3) {
                 if (safe.has(seq[i])) return false;
                 safe.add(seq[i]);
+            } else {
+                if (!safe.has(seq[i])) return false;
+                safe.delete(seq[i]);
             }
         }
 
@@ -54,3 +54,5 @@ const bridgeRiddle = (times, limit, res = []) => {
 
     return [...normalize].map(b => JSON.parse(b));
 }
+
+console.log(bridgeRiddle([42, 3, 5, 10], 60))
