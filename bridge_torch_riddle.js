@@ -19,14 +19,13 @@ const bridgeRiddle = (times, dur) => {
         const total = cross1 + times[ret1] + cross2 + times[ret2] + cross3;
 
         if (total === dur) {
-            const path = JSON.stringify([a, b, ret1, c, d, ret2, e, f].map(x => times[x]));
+            const path = [a, b, ret1, c, d, ret2, e, f].map(x => times[x]);
             results.push(path);
         }
     }
 
     const isValid = (seq) => {
         const safe = new Set();
-
         //to safe side
         safe.add(seq[0]);
         if (safe.has(seq[1])) return false;
@@ -47,22 +46,16 @@ const bridgeRiddle = (times, dur) => {
         //to safe side
         if (safe.has(seq[6])) return false;
         safe.add(seq[6]);
-
         if (safe.has(seq[7])) return false;
         safe.add(seq[7]);
 
         return true;
     };
-
-    const res = []
+    
+    const res = [];
     for (const path of results) {
-        const arrPath = JSON.parse(path);
-        if (isValid(arrPath)) {
-            res.push(arrPath);
-        }
+        isValid(path) && res.push(path);
     }
 
     return res;
 }
-
-console.log(bridgeRiddle([1, 2, 5, 10], 17))
